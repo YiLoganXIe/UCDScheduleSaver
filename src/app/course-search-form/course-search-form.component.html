@@ -1,0 +1,47 @@
+
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="m_quarter">Quarter: </label>
+                <select required class="form-control" ngModel name="m_quarter" id="m_quarter">
+                    <option>Fall Quarter 2020 </option>
+                </select>
+                <small id="m_quarter" class="form-text text-muted">*require</small>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="m_field">Field: </label>
+                <select class="form-control" ngModel name="m_field" id="m_field">
+                    <option *ngFor="let field of fields" [value]="field"> {{field}}</option>
+                </select>
+                <small id="m_fieldHelp" class="form-text text-muted">Prefix of the Course</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="m_course">Course: </label>
+                <input class="form-control" ngModel name="m_course" id="m_course">
+                <small id="m_courseHelp" class="form-text text-muted">XXX000X Example: ECS032A</small>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="m_instructor">Instructor: </label>
+                <input class="form-control" ngModel name="m_instructor" id="m_instructor">
+                <small id="m_instructorHelp" class="form-text text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="m_CRN">CRN: </label>
+                <input class="form-control" ngModel name="m_CRN" id="m_CRN">
+                <small id="m_CRNHelp" class="form-text text-muted">Optional</small>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>

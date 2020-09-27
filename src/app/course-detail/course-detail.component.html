@@ -1,0 +1,33 @@
+<div class="card text-white bg-info mb-2" style="width:20rem;">
+    <div class="card-header">
+        <span>{{course.Course}}   {{course.Section}} </span>
+        <span class="my-expand" (click)="toggle()" *ngIf="!isExpanded">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </span>
+        <span class="my-expand" (click)="toggle()" *ngIf="isExpanded">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+              </svg>
+        </span>
+        <app-favorite style="float: right;" [course]="course"></app-favorite>
+    </div>
+    <div class="card-body" *ngIf="isExpanded">
+        <h5 class="card-title">{{course.Title}}</h5>
+        <div *ngFor="let line of printTimeLocation(course)">
+            <p class="card-text">    {{line}}</p> 
+        </div> 
+        <p class="card-text">CRN: {{course.CRN}} Section: {{course.Section}} Credits: {{course.Credit}}</p>
+        <p class="card-text">Instructor: {{course.Instructor}}</p>
+        <p class="card-text"><span class="my-expand-link" *ngIf="!geExpanded" (click)="toggleGE()">View GE</span></p>
+        <p class="card-text"><span class="my-expand-link" *ngIf="geExpanded" (click)="toggleGE()">Fold GE</span></p>
+        <p *ngIf="geExpanded">{{course.GE}}</p>
+        <p class="card-text"><span class="my-expand-link" *ngIf="!descriptionExpanded" (click)="toggleDescription()">View Description</span></p>
+        <p class="card-text"><span class="my-expand-link" *ngIf="descriptionExpanded" (click)="toggleDescription()">Fold Description</span></p>
+        <p *ngIf="descriptionExpanded">{{course.Description}}</p>
+        <p class="card-text">Final: {{course.Final}}</p>
+        <button type="button" class="btn btn-light">Add to Schedule</button>
+    </div>
+</div>
+
