@@ -11,15 +11,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { CourseSearchFormComponent } from './course-search-form/course-search-form.component';
 import { FavCourseBarComponent } from './fav-course-bar/fav-course-bar.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/moment';
-import * as moment from 'moment';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-export function momentAdapterFactory() {
-  return adapterFactory(moment);
-};
 
 @NgModule({
   declarations: [
@@ -29,14 +21,12 @@ export function momentAdapterFactory() {
     FavoriteComponent,
     CourseSearchFormComponent,
     FavCourseBarComponent,
-    ScheduleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
     NgbModule
   ],
   providers: [
