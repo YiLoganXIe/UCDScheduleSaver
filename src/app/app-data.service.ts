@@ -7,8 +7,13 @@ interface courseObject{
   CRN: string;
   Credit: string;
   MeetWeekDay: Array<string>;
-  TimeSpan: Array<string>;
+  TimeSpan: Array<Array<string>>;
   Location: Array<string>;
+}
+
+interface newStatus{
+  status: string,
+  data: courseObject
 }
 
 @Injectable({
@@ -16,16 +21,16 @@ interface courseObject{
 })
 export class AppDataService {
 
-  favCourseList = [];
+  operation: newStatus;
 
   constructor() { }
 
-  private favCourseStream = new Subject<Array<courseObject>>();
+  private favCourseStream = new Subject<newStatus>();
 
   newFavCourse$ = this.favCourseStream.asObservable();
 
   UpdateFavCourse(){
-    this.favCourseStream.next(this.favCourseList);
+    this.favCourseStream.next(this.operation);
   }
 
 }

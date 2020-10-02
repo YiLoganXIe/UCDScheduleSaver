@@ -13,6 +13,17 @@ import { CourseSearchFormComponent } from './course-search-form/course-search-fo
 import { FavCourseBarComponent } from './fav-course-bar/fav-course-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import interactionPlugin from '@fullcalendar/interaction';
+import { FullcalendarComponent } from './fullcalendar/fullcalendar.component'; // a plugin
+import { Calendar } from '@fullcalendar/core';
+import timeGridPlugin from '@fullcalendar/timegrid';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  timeGridPlugin,
+  interactionPlugin
+]);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,13 +32,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FavoriteComponent,
     CourseSearchFormComponent,
     FavCourseBarComponent,
+    FullcalendarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    FullCalendarModule
   ],
   providers: [
     MongodbCourseService

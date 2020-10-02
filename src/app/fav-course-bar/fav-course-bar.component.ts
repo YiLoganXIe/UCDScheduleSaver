@@ -8,7 +8,7 @@ interface courseObject{
   CRN: string;
   Credit: string;
   MeetWeekDay: Array<string>;
-  TimeSpan: Array<string>;
+  TimeSpan: Array<Array<string>>;
   Location: Array<string>;
 }
 
@@ -21,9 +21,14 @@ interface courseObject{
 export class FavCourseBarComponent implements OnInit {
   constructor(private service: AppDataService) {
     this.service.newFavCourse$.subscribe(
-      newFavList =>{
-        this.favList = newFavList;
-        console.log(this.favList);
+      operation =>{
+        if(operation.status == "+"){
+          this.favList.push(operation.data);
+          console.log(this.favList);
+        }
+        else{
+          this.deleteCourse(operation.data);
+        }
       }
     )
    }
@@ -36,4 +41,13 @@ export class FavCourseBarComponent implements OnInit {
     this.favList = newFavList;
   }
 
+  deleteCourse(course:courseObject){
+    for(let i=0; i<this.favList.length; i++){
+      if(this.favList[i].CRN==course.CRN){
+        this.favList.splice(i,1);
+        return;
+      }
+    }
+    console.log("ERR: Cannot find data in the List");
+  }
 }

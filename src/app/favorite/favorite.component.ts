@@ -7,7 +7,7 @@ interface courseObject{
   CRN: string;
   Credit: string;
   MeetWeekDay: Array<string>;
-  TimeSpan: Array<string>;
+  TimeSpan: Array<Array<string>>;
   Location: Array<string>;
 }
 
@@ -25,25 +25,15 @@ export class FavoriteComponent implements OnInit {
 
   OnClick(){
     if(this.isFavorite){
-      this.deleteCourse()
+      this.favCourseService.operation = {status: '-', data: this.course};
     } else{
-      this.favCourseService.favCourseList.push(this.course);
+      this.favCourseService.operation = {status: '+', data: this.course};
     }
     this.favCourseService.UpdateFavCourse();
     this.isFavorite=!this.isFavorite;
   }
 
   ngOnInit(): void {
-  }
-
-  deleteCourse(){
-    for(let i=0; i<this.favCourseService.favCourseList.length; i++){
-      if(this.favCourseService.favCourseList[i].CRN==this.course.CRN){
-        this.favCourseService.favCourseList.splice(i,1);
-        return;
-      }
-    }
-    console.log("ERR: Cannot find data in the List");
   }
 
 }
