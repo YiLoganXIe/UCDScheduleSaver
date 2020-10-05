@@ -56,39 +56,40 @@ export class FullcalendarComponent implements OnInit {
     let instructionEnds = new Date(2020, 11, 11);
     let api = this.calendarComponent.getApi();
     if(op == "+"){
-      for(let i = 0; i < data.MeetWeekDay.length; i++){      
-        let m_weekDay = [];
-        for(let j = 0; j<data.MeetWeekDay[i].length; j++){
-          switch(data.MeetWeekDay[i][j]){
-            case "M" :
-              m_weekDay.push(1);
-              break;
-            case "T" :
-              m_weekDay.push(2);
-              break;
-            case "W" :
-              m_weekDay.push(3);
-              break;
-            case "R" :
-              m_weekDay.push(4);
-              break;
-            case "F" :
-              m_weekDay.push(5);
-              break;
+      if(data.MeetWeekDay[0]=="TBA"){
+        api.addEvent({start: firstDayofInstruction, end: instructionEnds, id:data.CRN, title: data.Course, startRecur: firstDayofInstruction, endRecur: instructionEnds, allDay:true});
+      }
+      else{
+        for(let i = 0; i < data.MeetWeekDay.length; i++){      
+          let m_weekDay = [];
+          for(let j = 0; j<data.MeetWeekDay[i].length; j++){
+            switch(data.MeetWeekDay[i][j]){
+              case "M" :
+                m_weekDay.push(1);
+                break;
+              case "T" :
+                m_weekDay.push(2);
+                break;
+              case "W" :
+                m_weekDay.push(3);
+                break;
+              case "R" :
+                m_weekDay.push(4);
+                break;
+              case "F" :
+                m_weekDay.push(5);
+                break;
+            }
           }
+          api.addEvent({daysOfWeek: m_weekDay, id:data.CRN, title: data.Course, startTime: this.getTime(data, i, true), endTime: this.getTime(data, i , false),startRecur: firstDayofInstruction, endRecur: instructionEnds, allDay:false});
         }
-        let m_startTime = data.TimeSpan[i][0];
-        let m_endTime = new Date();
-        //m_startTime.setHours(this.getHour(data, i, true));
-        //m_endTime.setHours(this.getHour(data, i, false));
-        api.addEvent({daysOfWeek: m_weekDay, id:data.CRN, title: data.Course, startTime: this.getTime(data, i, true), endTime: this.getTime(data, i , false),startRecur: firstDayofInstruction, endRecur: instructionEnds, allDay:false});
       }
     }else{
-      let event = api.getEventById(data.CRN);
-      if(event != null){
-        event.remove();
-      } else{
-        alert('Cannot Found Event!');
+      let events = api.getEvents();
+      for(let i=0; i<events.length; i++){
+        if(events[i].id==data.CRN){
+          events[i].remove();
+        }
       }
     }
   }

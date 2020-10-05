@@ -1,3 +1,4 @@
+import { CourseDetailComponent } from './../course-detail/course-detail.component';
 import { CommonModule } from '@angular/common';
 import { AppDataService } from './../app-data.service';
 import { Component, OnInit} from '@angular/core';

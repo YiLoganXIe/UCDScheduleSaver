@@ -11,7 +11,7 @@
                 <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
               </svg>
         </span>
-        <app-favorite style="float: right;" [course]="course"></app-favorite>
+        <app-favorite style="float: right;" [course]="course" [inFavBar]="inFavBar"></app-favorite>
     </div>
     <div class="card-body" *ngIf="isExpanded">
         <h5 class="card-title">{{course.Title}}</h5>
@@ -27,7 +27,6 @@
         <p class="card-text"><span class="my-expand-link" *ngIf="descriptionExpanded" (click)="toggleDescription()">Fold Description</span></p>
         <p *ngIf="descriptionExpanded">{{course.Description}}</p>
         <p class="card-text">Final: {{course.Final}}</p>
-        <button type="button" class="btn btn-light">Add to Schedule</button>
     </div>
 </div>
 

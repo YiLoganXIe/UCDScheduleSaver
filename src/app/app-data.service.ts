@@ -21,6 +21,7 @@ interface newStatus{
 })
 export class AppDataService {
 
+  favList: Array<courseObject> =[];
   operation: newStatus;
 
   constructor() { }
@@ -31,6 +32,15 @@ export class AppDataService {
 
   UpdateFavCourse(){
     this.favCourseStream.next(this.operation);
+    if(this.operation.status=="+"){
+      this.favList.push(this.operation.data);
+    } else{
+      for(let i=0; i<this.favList.length; i++){
+        if(this.favList[i]){
+          this.favList.splice(i,1);
+        }
+      }
+    }
   }
 
 }

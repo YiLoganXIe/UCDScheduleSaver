@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common'
 })
 export class CourseDetailComponent implements OnInit {
   @Input('course') mycourse;
+  @Input('inFavBar') inFavBar: boolean = false;
   isExpanded: boolean = false;
   geExpanded:boolean = false;
   descriptionExpanded:boolean = false;

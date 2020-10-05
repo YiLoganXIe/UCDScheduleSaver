@@ -18,7 +18,7 @@ interface courseObject{
 })
 export class FavoriteComponent implements OnInit {
   @Input("course") course: courseObject;
-
+  @Input("inFavBar") inFavBar: Boolean;
   isFavorite:boolean = false;
 
   constructor(private favCourseService: AppDataService) { }
@@ -30,10 +30,22 @@ export class FavoriteComponent implements OnInit {
       this.favCourseService.operation = {status: '+', data: this.course};
     }
     this.favCourseService.UpdateFavCourse();
-    this.isFavorite=!this.isFavorite;
   }
 
   ngOnInit(): void {
+    if(this.inFavBar){
+      this.isFavorite=true;
+    }
+    this.favCourseService.newFavCourse$.subscribe(operation=>{
+      if(operation.data.CRN==this.course.CRN){
+        if(operation.status=="+"){
+          this.isFavorite=true;
+        }
+        else{
+          this.isFavorite=false;
+        }
+      }
+    })
   }
 
 }
