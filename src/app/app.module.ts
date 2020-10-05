@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MongodbCourseService } from './mongodb-course.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component'; // a plugin
 import { Calendar } from '@fullcalendar/core';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   timeGridPlugin,
@@ -32,7 +34,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FavoriteComponent,
     CourseSearchFormComponent,
     FavCourseBarComponent,
-    FullcalendarComponent,
+    FullcalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     HttpClientModule,
     FormsModule,
     NgbModule,
-    FullCalendarModule
+    FullCalendarModule,
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [
     MongodbCourseService

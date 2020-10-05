@@ -2,6 +2,7 @@ import { CourseDetailComponent } from './../course-detail/course-detail.componen
 import { CommonModule } from '@angular/common';
 import { AppDataService } from './../app-data.service';
 import { Component, OnInit} from '@angular/core';
+import { CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 interface courseObject{
   Course: string;
@@ -34,7 +35,7 @@ export class FavCourseBarComponent implements OnInit {
     )
    }
 
-  favList = [];
+  favList = []; 
   ngOnInit(): void {
   }
 
@@ -50,5 +51,9 @@ export class FavCourseBarComponent implements OnInit {
       }
     }
     console.log("ERR: Cannot find data in the List");
+  }
+
+  drop(event: CdkDragDrop<courseObject>) {
+    moveItemInArray(this.favList, event.previousIndex, event.currentIndex);
   }
 }

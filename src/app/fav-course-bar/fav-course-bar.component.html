@@ -1,6 +1,9 @@
 <div class="card mb-3" style="width: 23rem">
     <h5>Favorite Course</h5>
-    <div *ngFor="let course of favList">
-        <app-course-detail [course]="course" [inFavBar]="true"></app-course-detail>    
+    <p>Ordering importance by dragging the course</p>
+    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class = "example-box" *ngFor="let course of favList" cdkDrag>
+           <app-course-detail [course]="course" [inFavBar]="true"></app-course-detail>  
+        </div>
     </div>
 </div>
